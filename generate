@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby -w
+
+require "optparse"
+require "date"
+
+date = Date.today.to_s
+notes = "notes/#{date}-notes.md"
+tasks = "tasks/#{date}-tasks.md"
+
+generate_file = Proc.new do |filename, type|
+  File.open(filename, 'w') { |f|
+    f.write("# #{type} :: #{date}\n")
+    f.write("  - ")
+
+    puts "generated #{filename}..."
+  }
+end
+
+OptionParser.new { |p|
+  p.on('--meeting WHOM', 'do you have a meeting today?') do |val|
+    filename = "meetings/#{date}-#{val}.md"
+    generate_file.call(filename, "meeting")
+  end
+}.parse!
+
+if (not File.exist? notes)
+  generate_file.call(notes, "notes")
+else
+  puts "#{notes} exists, skipping..."
+end
+
+if (not File.exist? tasks)
+  generate_file.call(tasks, "tasks")
+else
+  puts "#{tasks} exists, skipping..."
+end
+
