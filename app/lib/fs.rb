@@ -17,13 +17,13 @@ class FS
 
   def create_meeting(name) 
     path = "meetings/#{name}.md"
-    opt = should_create_file(path) ? 'w+' : 'a+'
+    opt = should_create_file(path) ? 'w' : 'a+'
     File.open(path, opt) { |f| @file_contents.call(f, @day.today) }
   end
   
   def create_tasks
     path = "tasks/week-of-#{@day.this_monday}.md"
-    opt = @day.should_create_new_week ? 'w+' : 'a+'
+    opt = @day.should_create_new_week ? 'w' : 'a+'
     File.open(path, opt) { |f| @file_contents.call(f, @day.today) }
   end
 end

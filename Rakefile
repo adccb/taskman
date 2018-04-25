@@ -11,7 +11,8 @@ task :tasks do
   ruby "app/cli.rb --tasks"  
 end
 
-task :meeting, [:name] do |t, args|
-  sh "ruby app/cli.rb --meeting #{args[:name]}"
+task :meeting do
+  ARGV.each { |a| task a.to_sym do ; end }
+  sh "ruby app/cli.rb --meeting #{ ARGV[1] }"
 end
 
