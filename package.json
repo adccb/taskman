@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/mxtetrachord/taskman/issues"
   },
-  "homepage": "https://github.com/mxtetrachord/taskman#readme"
+  "homepage": "https://github.com/mxtetrachord/taskman#readme",
+  "dependencies": {
+    "commander": "^2.20.0"
+  }
 }
